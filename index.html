@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+
+    <meta name="author" content="Niels Ockeloen" />
+    <meta name="robots" content="index" />
+    <meta name="revisit-after" content="1 week" />
+    <meta name="generator" content="D2D Semantic CMS" />
+    <meta name="keywords" content="Data 2 Documents RDF Linked Data LD LOD Vocabulary Ontology Schema" />
+    <meta name="description" content="Data 2 Documents - A semantic vocabulary to declare documents out of data" />
+
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine" />
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Emblema+One" />
+
+
+
+
+    <title>BiographyNet - Demonstrator</title>
+
+    <style type="text/css">
+
+      body                      {  text-align: center; margin: 0px;
+                                   font-family: verdana, arial, sans-serif;
+                                }
+      #container-main           {   
+                                   margin: 0px; 
+                                   text-align: center;
+                                }     
+      #container-header         {  vertical-align: top;
+                                }
+      #content-header           {  padding-top: 10px;
+                                   padding-bottom: 50px; 
+                                   vertical-align: top;
+                                }
+      #container-mid            {  margin: 0px;
+      	                           padding-left: 50%;
+                                   vertical-align: top;
+                                   text-align: center;
+
+                                }
+      #content-mid              {  position: relative;
+      	                           margin-left: -300px;
+      	                           width: 600px;
+                                   height: 200px;
+                                   font-size: 18px;
+                                }
+      #container-bottom         {  margin-top: 0px;  
+                                   vertical-align: top;
+                                }
+      #content-bottom           {  padding-top: 8px;
+                                   padding-bottom: 0px; 
+                                   vertical-align: top;
+                                   font-family: Verdana, Arial, sans-serif;
+                                   font-weight: normal; 
+                                   font-size: 10px; 
+                                }
+
+      h1                        {  display: block; 
+                                   font-family: 'Tangerine', serif; 
+                                   font-weight: normal; 
+                                   font-size: 48px; 
+                                   text-shadow: 4px 4px 4px #aaa;
+                                   padding: 0px;
+                                   margin: 0px;
+                                }
+      h2                        {  display: block; 
+                                   color: #e0e0e0;
+                                   font-family: 'Emblema One', serif; 
+                                   font-weight: bold; 
+                                   font-size: 28px; 
+                                   text-shadow: 4px 4px 4px #555;
+                                   padding: 0px;
+                                   margin: 0px;
+                                }
+      h4                        {  display: block; 
+                                   font-family: 'Tangerine', serif; 
+                                   font-weight: normal; 
+                                   font-size: 32px; 
+                                   text-shadow: 4px 4px 4px #aaa;
+                                   padding: 0px;
+                                   margin: 0px;
+                                   margin-left: -2px;
+                                }
+
+                                
+      #BNETTimeLineCanvas       {  position: absolute;
+      	                           top: 120px;
+      	                           left: 50%;
+                                   margin-left: -700px;
+                                   border: #000000 1px solid;
+                                   width: 1400px;
+                                   height: 600px;
+                                }
+      #infobox                  {  position: absolute;
+      	                           top: 940px;
+      	                           left: 0px;
+      	                           right: 0px;
+                                   border: #000000 0px solid;
+                                   text-align: center;
+                                   font-family: Verdana, Arial, sans-serif;
+                                   font-weight: normal; 
+                                   font-size: 10px;
+                                   overflow: 
+                                }                                
+                                
+                                
+
+    </style> 
+
+    <script type="text/javascript" src="js/lib/EaselJS/easeljs-0.7.1.min.js"></script>
+
+    <script type="text/javascript" src="data/BNETRAWDATA.js"></script>
+
+    <script type="text/javascript" src="js/clsBNETCollection.js"></script>
+    <script type="text/javascript" src="js/clsBNETTimeLine.js"></script>
+    <script type="text/javascript" src="js/clsBNETItem.js"></script>
+    <script type="text/javascript" src="js/clsBNETEvent.js"></script>
+    <script type="text/javascript" src="js/modBNETMain.js"></script> <!-- load as last script -->
+
+
+
+  </head>
+
+  <body onLoad="BNET.initialize('BNETTimeLineCanvas');">
+    <div id="container-main">
+      <div id="container-header">
+        <div id="content-header">
+            <h1>BiographyNet</h1>
+            <h2>DEMONSTRATOR</h2>
+        <div>
+<button onclick="BNET.TimeLine.setVisibleDaysPerCanvas(((BNET.TimeLine.visibleDaysPerCanvas * 0.8) | 0)); BNET.TimeLine.drawTimeLine(BNET.TimeLine.CenterDate);">zoom in</button>
+<button onclick="BNET.TimeLine.setVisibleDaysPerCanvas(((BNET.TimeLine.visibleDaysPerCanvas * 1.2) | 0)); BNET.TimeLine.drawTimeLine(BNET.TimeLine.CenterDate);">zoom out</button>
+
+<button onclick="BNET.TimeLine.setVisibleLinesPerCanvas(((BNET.TimeLine.nrOfVisibleLines - 1) | 0)); BNET.TimeLine.drawTimeLine(BNET.TimeLine.CenterDate);">-</button>
+<button onclick="BNET.TimeLine.setVisibleLinesPerCanvas(((BNET.TimeLine.nrOfVisibleLines + 1) | 0)); BNET.TimeLine.drawTimeLine(BNET.TimeLine.CenterDate);">+</button>
+
+
+        </div>
+        </div>
+      </div>
+      <div id="container-mid">
+        <div id="content-mid">
+
+           
+
+
+
+
+        </div>
+      </div>
+<!--
+      <div id="infobox">
+        <p>
+          &copy; 2014 VU University Amsterdam
+        </p>
+        <p>
+          
+        </p>
+        <p>
+           <a href="mailto:info@biographynet.nl">info@biographynet.nl</a>
+        </p>
+      </div>
+-->
+
+    </div>
+
+
+<canvas id="BNETTimeLineCanvas" width="1400" height="600"></canvas>
+
+
+
+  </body>
+</html>
+
+
+
+
+

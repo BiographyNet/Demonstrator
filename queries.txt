@@ -1,0 +1,90 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX bgn: <http://purl.org/collections/nl/biographyned/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?surname ?firstname ?birthWhen ?deathWhen WHERE {
+
+  ?birthEvent rdf:type bgn:Event . 
+  ?birthEvent bgn:type "birth" .
+  ?birthEvent bgn:when ?birthWhen .
+  ?deathEvent rdf:type bgn:Event . 
+  ?deathEvent bgn:type "death" .
+  ?deathEvent bgn:when ?deathWhen .
+  ?personDes rdf:type bgn:Person .
+  ?personDes bgn:event ?birthEvent .
+  ?personDes bgn:event ?deathEvent .
+  ?personDes bgn:persName ?persNameRes .
+  ?persNameRes bgn:name ?surname .
+  ?persNameRes rdf:value ?firstname .
+  
+  FILTER (STRLEN(?birthWhen) = 10 && STRLEN(?deathWhen) = 10)
+  
+  # FILTER (?deathWhen >= "1709-01-01"^^xsd:date && ?birthWhen <= "1910-01-31"^^xsd:date)
+
+} LIMIT 50
+
+
+
+
+
+
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX bgn: <http://purl.org/collections/nl/biographyned/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?surname ?firstname ?birthWhen ?deathWhen WHERE {
+
+  ?birthEvent rdf:type bgn:Event . 
+  ?birthEvent bgn:type "birth" .
+  ?birthEvent bgn:when ?birthWhen .
+  ?deathEvent rdf:type bgn:Event . 
+  ?deathEvent bgn:type "death" .
+  ?deathEvent bgn:when ?deathWhen .
+  ?personDes rdf:type bgn:Person .
+  ?personDes bgn:event ?birthEvent .
+  ?personDes bgn:event ?deathEvent .
+  ?personDes bgn:persName ?persNameRes .
+  ?persNameRes bgn:name ?surname .
+  ?persNameRes rdf:value ?firstname .
+  
+  
+  FILTER (?deathWhen >= "1850-01-01"^^xsd:date && ?birthWhen <= "1950-12-31"^^xsd:date)
+
+} LIMIT 500
+
+
+bgn:personRepID	
+"51142088"
+
+
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX bgn: <http://purl.org/collections/nl/biographyned/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?persID ?surname ?firstname ?birthWhen ?deathWhen WHERE {
+
+  ?birthEvent rdf:type bgn:Event . 
+  ?birthEvent bgn:type "birth" .
+  ?birthEvent bgn:when ?birthWhen .
+  ?deathEvent rdf:type bgn:Event . 
+  ?deathEvent bgn:type "death" .
+  ?deathEvent bgn:when ?deathWhen .
+  ?personDes rdf:type bgn:Person .
+  ?personDes bgn:event ?birthEvent .
+  ?personDes bgn:event ?deathEvent .
+  ?personDes bgn:persName ?persNameRes .
+  ?persNameRes bgn:name ?surname .
+  ?persNameRes rdf:value ?firstname .
+  ?bioDes bgn:person ?personDes .
+  ?bioDes bgn:aggregatedPerson ?personRep .
+  ?personRep bgn:personRepID ?persID .
+  
+  FILTER (?deathWhen >= "1850-01-01"^^xsd:date && ?birthWhen <= "1950-12-31"^^xsd:date)
+
+} LIMIT 20
+
+
+

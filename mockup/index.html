@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>BiographyNet - Demonstrator</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script type="text/javascript">
+
+      function activateTab(pageId, tabId) {
+          var tabCtrl = document.getElementById(tabId);
+          var pageToActivate = document.getElementById(pageId);
+          for (var i = 0; i < tabCtrl.childNodes.length; i++) {
+              var node = tabCtrl.childNodes[i];
+              if (node.nodeType == 1) { /* Element */
+                  node.style.display = (node == pageToActivate) ? 'block' : 'none';
+              }
+          }
+      }
+
+
+    </script>
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <script src="jquery.min.js"></script>
+
+    <script src="tipuedrop/tipuedrop_content.js"></script>
+    <link href="tipuedrop/tipuedrop.css" rel="stylesheet">
+    <script src="tipuedrop/tipuedrop.js"></script>
+
+    <script type="text/javascript">
+    window.document.onkeydown = function (e)
+    {
+            if (!e){
+                    e = event;
+            }
+            if (e.keyCode == 27){
+                    lightbox_close();
+            }
+    }
+    function lightbox_open(element){
+            window.scrollTo(0,0);
+            document.getElementById(element).style.display='block';
+            document.getElementById('fade').style.display='block';
+    }
+    function lightbox_close(){
+        var boxes = document.getElementsByClassName('popup'),
+        i = boxes.length;
+
+        while(i--) {
+            boxes[i].style.display='none';
+        }
+        document.getElementById('fade').style.display='none';
+    }
+    </script>
+
+    <script type="text/javascript">
+        function handleAddedElement(elemId){
+            var elem = document.getElementById(elemId);
+            elem.style.display='block';
+
+            //Assignment 1 part 0
+            if (document.getElementById('Ass1_elem1').style.display == 'block') {
+                document.getElementById('Ass1_timeline0').style.display = 'block';
+            }
+
+            //Assignment 1
+            if (document.getElementById('Ass1_elem1').style.display == 'block' && document.getElementById('Ass1_elem2').style.display == 'block') {
+                document.getElementById('Ass1_timeline0').style.display='none'; /*Delete timeline0*/
+                document.getElementById('Ass1_timeline').style.display='block';
+                document.getElementById('Ass1_graph').style.display='block';
+                document.getElementById('Ass1_rawdata').style.display='block';
+                document.getElementById('Ass1_navpath').style.display='block';
+            }
+
+            //Assignment 2 part 1
+            if (document.getElementById('Ass2_elem1').style.display == 'block' &&
+                (document.getElementById('fromtime').value != '1820' ||
+                document.getElementById('totime').value != '1825'))
+            {
+                //Show mainscreen parts
+                document.getElementById('Ass2_timeline1').style.display='block';
+                document.getElementById('Ass2_graph').style.display='block';
+                document.getElementById('Ass2_map1').style.display='block';
+                document.getElementById('Ass2_rawdata').style.display='block';
+                document.getElementById('Ass2_navpath').style.display='block';
+            }
+
+            //Assignment 2 part 2
+            if (document.getElementById('Ass2_elem1').style.display == 'block' &&
+                document.getElementById('Ass2_elem2').style.display == 'block' &&
+                document.getElementById('fromtime').value == '1820' &&
+                document.getElementById('totime').value == '1825')
+            {
+                //Show mainscreen parts
+                document.getElementById('Ass2_timeline1').style.display='none';
+                document.getElementById('Ass2_timeline2').style.display='block';
+                document.getElementById('Ass2_graph').style.display='block';
+                document.getElementById('Ass2_map1').style.display='none';
+                document.getElementById('Ass2_map2').style.display='block';
+                document.getElementById('Ass2_rawdata').style.display='block';
+                document.getElementById('Ass2_navpath').style.display='block';
+            }
+
+            if (document.getElementById('Ass3_elem1').style.display == 'block'){
+                handleElem3();
+            }
+        }
+
+        function handleElem3(){
+                //Show mainscreen parts
+                document.getElementById('Ass3_timeline').style.display='block';
+                document.getElementById('Ass3_graph').style.display='block';
+                document.getElementById('Ass3_map').style.display='block';
+                document.getElementById('Ass3_rawdata').style.display='block';
+                document.getElementById('Ass3_navpath').style.display='block';
+        }
+
+        function handleDeletedElement(elemId){
+            var elem = document.getElementById(elemId);
+            elem.style.display='none';
+
+            //Assignment 1
+            if (document.getElementById('Ass1_elem1').style.display == 'none' &&
+                document.getElementById('Ass1_elem2').style.display == 'none')
+            {
+                //Hide mainscreen parts
+                document.getElementById('Ass1_timeline').style.display='none';
+                document.getElementById('Ass1_timeline0').style.display = 'none';
+                document.getElementById('Ass1_graph').style.display='none';
+                document.getElementById('Ass1_rawdata').style.display='none';
+                document.getElementById('Ass1_navpath').style.display='none';
+            }
+
+			if (document.getElementById('Ass1_elem1').style.display == 'block' &&
+                document.getElementById('Ass1_elem2').style.display == 'none')
+            {
+                //Hide mainscreen parts
+                document.getElementById('Ass1_timeline').style.display='none';
+                document.getElementById('Ass1_timeline0').style.display = 'block';
+                document.getElementById('Ass1_graph').style.display='none';
+                document.getElementById('Ass1_rawdata').style.display='none';
+                document.getElementById('Ass1_navpath').style.display='none';
+            }
+
+            //Assignment 2
+            if (document.getElementById('Ass2_elem1').style.display == 'none')
+            {
+                //Hide mainscreen parts
+                document.getElementById('Ass2_timeline1').style.display='none';
+                document.getElementById('Ass2_timeline2').style.display='none';
+                document.getElementById('Ass2_graph').style.display='none';
+                document.getElementById('Ass2_map1').style.display='none';
+                document.getElementById('Ass2_map2').style.display='none';
+                document.getElementById('Ass2_rawdata').style.display='none';
+                document.getElementById('Ass2_navpath').style.display='none';
+            }
+
+            //Assignment 3
+            if (document.getElementById('Ass3_elem1').style.display == 'none')
+            {
+                //Hide mainscreen parts
+                document.getElementById('Ass3_timeline').style.display='none';
+                document.getElementById('Ass3_graph').style.display='none';
+                document.getElementById('Ass3_map').style.display='none';
+                document.getElementById('Ass3_rawdata').style.display='none';
+                document.getElementById('Ass3_navpath').style.display='none';
+            }
+
+        }
+    </script>
+    <link rel="stylesheet" href="jquery-ui.css">
+    <script src="jquery-ui.js"></script>
+    <script type="text/javascript" src="CollapsibleLists.js"></script>
+    <link type="text/css" rel="stylesheet" href="jquery.qtip.css" />
+</head>
+
+<body onload="CollapsibleLists.apply(); $('[title]').qtip(
+        {content: {
+            title: function(event, api) {
+            return $(this).attr('alt');
+            }
+        },
+        position: {
+            my: 'top left',
+            at: 'bottom right',
+            target: 'mouse',
+            adjust: {x: 10, y: 10}
+        },
+        style: {
+            classes: 'qtip-light qtip-shadow qtip-rounded'
+        }});">
+    <script type="text/javascript" src="jquery.qtip.js"></script>
+    <div id="tipue_drop_fade"></div>
+    <div id="header">
+        <div id="tipue_searchbox">
+            <input type="text" id="tipue_drop_input" autocomplete="off" placeholder="People, Places, Events...">
+            <img src="images/info_button.png" title="Help" width="25" height="25" onclick="lightbox_open('infopopup')" href="#" style="cursor: pointer;">
+        </div>
+        <div id="tipue_drop_content"></div>
+        <script>
+            $(document).ready(function() {
+                 $('#tipue_drop_input').tipuedrop({'show': 5});
+            });
+        </script>
+    </div>
+    <div id="contentcontainer">
+        <div id="leftcont">
+            <ul class="tabsheader">
+                <li><a href="javascript:activateTab('elementsbox','elementscontainer')">Elements</a></li>
+                <li><a href="javascript:activateTab('navigationpathbox','elementscontainer')">Navigation Path</a></li>
+            </ul>
+            <div id="elementscontainer">
+                <div id="elementsbox" style="display: block;">
+                    <p id="noelementsselected" style="zIndex='-1'">No elements selected</p>
+
+                    <!-- Assignment 1-->
+                    <div class="element" id="Ass1_elem1" style="display: none;">
+                        <p>
+                            <b style="color: red;">Dirk Fock</b>
+                            <button type="submit" style="float: right;" onclick="handleDeletedElement('Ass1_elem1');">Delete</button><br />
+                            <input type="checkbox" checked/>Birth date<br />
+                            <input type="checkbox" checked/>Birth location<br />
+                            <input type="checkbox" checked/>Profession<br />
+                        </p>
+                    </div>
+                    <div class="element" id="Ass1_elem2" style="display: none;">
+                        <p>
+                            <b style="color: red;">Theodoor Herman de Meester</b>
+                            <button type="submit" style="float: right;" onclick="handleDeletedElement('Ass1_elem2');">Delete</button><br />
+                            <input type="checkbox" checked/>Birth date<br />
+                            <input type="checkbox" checked/>Birth location<br />
+                            <input type="checkbox" checked/>Profession<br />
+                        </p>
+                    </div>
+
+                    <!-- Assignment 2-->
+                    <div class="element" id="Ass2_elem1" style="display: none;">
+                        <p>
+                            <b style="color: red;">Johan Rudolph Thorbecke</b>
+                            <button type="submit" style="float: right;" onclick="handleDeletedElement('Ass2_elem1');">Delete</button><br />
+                            <input type="checkbox" checked/>Birth date<br />
+                            <input type="checkbox" checked/>Birth location<br />
+                            <input type="checkbox" checked/>Profession<br />
+                        </p>
+                    </div>
+
+                    <div class="element" id="Ass2_elem2" style="display: none;">
+                        <p>
+                            <b style="color: green;">Duitsland</b>
+                            <button type="submit" style="float: right;" onclick="handleDeletedElement('Ass2_elem2');">Delete</button><br />
+                        </p>
+                    </div>
+
+                    <!-- Assignment 3-->
+                    <div class="element" id="Ass3_elem1" style="display: none;">
+                        <p>
+                            <b style="color: red;">Desiderius Erasmus</b>
+                            <button type="submit" style="float: right;" onclick="handleDeletedElement('Ass3_elem1');">Delete</button><br />
+                            <input type="checkbox" checked/>Birth date<br />
+                            <input type="checkbox" checked/>Birth location<br />
+                            <input type="checkbox" checked/>Profession<br />
+                        </p>
+                    </div>
+                </div>
+                <div id="navigationpathbox" style="display: none;">
+                    <div id="Ass1_navpath" class="treeView" style="display: none;">
+                        <ul class="collapsibleList">
+                            <li>
+                                Added: Dirk Fock
+                            </li>
+                            <li>
+                                Added: Theodoor Herman de Meester
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div id="Ass2_navpath" class="treeView" style="display: none;">
+                        <ul class="collapsibleList">
+                            <li>
+                                Added: Johan Rudolph Thorbecke
+                            </li>
+                            <li>
+                                Added: Duitsland
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div id="Ass3_navpath" class="treeView" style="display: none;">
+                        <ul class="collapsibleList">
+                            <li>
+                                Added: Desiderius Erasmus
+                            </li>
+                        </ul>
+                    </div>
+                    <button type="submit" class="savebutton">Save</button>
+                </div>
+            </div>
+        </div>
+        <div id="rightcont">
+            <ul class="tabsheader">
+                <li><a href="javascript:activateTab('timelinebox','visualisationscontainer')">Timeline</a></li>
+                <li><a href="javascript:activateTab('graphbox','visualisationscontainer')">Graph</a></li>
+                <li><a href="javascript:activateTab('mapbox','visualisationscontainer')">Map</a></li>
+                <li><a href="javascript:activateTab('rawdatabox','visualisationscontainer')">Raw data</a></li>
+            </ul>
+            <div id="visualisationscontainer">
+                <div class="visualisationsbox" id="timelinebox" style="display: block;">
+                    <div id="filterbox">
+                        <img src="images/filter-icon.png" alt="Filter icon" height="20" width="20">
+                        <label><input type="checkbox" checked/><span style="color: red"><b>People</b></span></label>
+                        <label><input type="checkbox" checked/><span style="color: green"><b>Places</b></span></label>
+                        <label><input type="checkbox" checked/><span style="color: orange"><b>Events</b></span></label>
+                    </div>
+
+                    <img id="Ass1_timeline0" src="images/Ass1_timeline0.jpg" height="214" width="654" style="display: none;" usemap="#Ass1_timeline0_map">
+                    <img id="Ass1_timeline" src="images/Ass1_timeline.jpg" height="329" width="655" style="display: none;" usemap="#Ass1_timeline_map">
+                    <img id="Ass2_timeline1" src="images/Ass2_timeline.jpg" height="310" width="567" style="display: none;" usemap="#Ass2_timeline1_map">
+                    <img id="Ass2_timeline2" src="images/Ass2_timeline.jpg" height="620" width="1134" style="display: none;" usemap="#Ass2_timeline2_map">
+                    <img id="Ass3_timeline" src="images/Ass3_timeline.jpg" height="82" width="654" style="display: none;" usemap="#Ass3_timeline_map">
+
+					<map name="Ass1_timeline0_map">
+                        <area title="Studie rechten" href="#" shape="rect" coords="88,138,189,202" onclick="lightbox_open('Ass1_popup0')"/>
+                        <area title="Kabinet de Meester" href="#" shape="rect" coords="301,138,427,198" onclick="lightbox_open('Ass1_popup0')"/>
+                    </map>
+
+                    <map name="Ass1_timeline_map">
+                        <area title="Studie rechten" href="#" shape="rect" coords="88,138,189,202" onclick="lightbox_open('Ass1_popup')"/>
+                        <area title="Kabinet de Meester" href="#" shape="rect" coords="301,138,427,198" onclick="lightbox_open('Ass1_popup')"/>
+                    </map>
+
+                    <map name="Ass2_timeline1_map">
+                    	<area  title="Giessen" href="#" shape="rect" coords="5,2,564,47" onclick="lightbox_open('Ass2_popup')"/>
+						<area  title="Gšttingen" href="#" shape="rect" coords="4,62,563,107" onclick="lightbox_open('Ass2_popup')"/>
+						<area  title="Duitsland" href="#" shape="rect" coords="5,262,564,307" onclick="lightbox_open('Ass2_popup')"/>
+						<area  title="Johan Rudolph Thorbecke" href="#" shape="rect" coords="54,177,516,221" onclick="lightbox_open('Ass2_popup')"/>
+					</map>
+
+					<map name="Ass2_timeline2_map">
+                    	<area  title="Giessen" href="#" shape="rect" coords="10,4,1128,94" onclick="lightbox_open('Ass2_popup')"/>
+						<area  title="Gšttingen" href="#" shape="rect" coords="8,124,1128,214" onclick="lightbox_open('Ass2_popup')"/>
+						<area  title="Duitsland" href="#" shape="rect" coords="10,524,1128,614" onclick="lightbox_open('Ass2_popup')"/>
+						<area  title="Johan Rudolph Thorbecke" href="#" shape="rect" coords="108,354,1032,442" onclick="lightbox_open('Ass2_popup')"/>
+					</map>
+
+                    <map name="Ass3_timeline_map">
+                        <area title="Birth date" href="#" shape="rect" coords="0,0,654,82" onclick="lightbox_open('Ass3_popup')"/>
+                    </map>
+
+                    <script>
+                        $( ".visualisationsbox img" ).draggable();
+                    </script>
+                </div>
+                <div class="visualisationsbox" id="graphbox" style="display: none;">
+                    <div id="filterbox">
+                        <img src="images/filter-icon.png" alt="Filter icon" height="20" width="20">
+                        <label><input type="checkbox" checked/><span style="color: red"><b>People</b></span></label>
+                        <label><input type="checkbox" checked/><span style="color: green"><b>Places</b></span></label>
+                        <label><input type="checkbox" checked/><span style="color: orange"><b>Events</b></span></label>
+                    </div>
+
+                    <img id="Ass1_graph" src="images/Ass1_graph.jpg" height="184" width="213" style="display: none;" usemap="#Ass1_graph_map">
+                    <map name="Ass1_graph_map">
+                        <area title="Studie rechten" href="#" shape="rect" coords="15,12,44,41" onclick="lightbox_open('Ass1_popup')"/>
+                        <area title="Kabinet de Meester" href="#" shape="rect" coords="170,37,199,66" onclick="lightbox_open('Ass1_popup')"    />
+                        <area title="Dirk Fock" shape="rect" coords="76,133,105,162"/>
+                        <area title="Theodoor Herman de Meester" shape="rect" coords="137,141,163,165"/>
+                        <area title="Relation" href="#" shape="poly" coords="107,140,108,156,136,161,138,142" onclick="lightbox_open('Ass1_popup')"/>
+                    </map>
+
+
+                    <img id="Ass2_graph" src="images/Ass2_graph.jpg" height="158" width="167" style="display: none;" usemap="#Ass2_graph_map">
+                    <map name="Ass2_graph_map">
+                        <area title="Giessen" href="#" shape="rect" coords="6,2,35,31" onclick="lightbox_open('Ass2_popup')"    />
+                        <area title="Gšttingen" href="#" shape="rect" coords="138,16,165,44" onclick="lightbox_open('Ass2_popup')"    />
+                        <area title="Duitsland" href="#" shape="rect" coords="72,55,99,83" onclick="lightbox_open('Ass2_popup')"    />
+                        <area title="Johan Rudolph Thorbecke" href="#" shape="rect" coords="73,123,100,151" onclick="lightbox_open('Ass2_popup')"    />
+                        <area title="Relation" href="#" shape="rect" coords="73,75,100,127" onclick="lightbox_open('Ass2_popup')"    />
+                    </map>
+
+                    <img id="Ass3_graph" src="images/Ass3_graph.jpg" onclick="lightbox_open('Ass3_popup')" href="#"  height="158" width="195" style="display: none;" usemap="#Ass3_graph_map">
+                    <map name="Ass3_graph_map">
+                        <area  title="Rotterdam" href="#" shape="rect" coords="164,33,189,57" onclick="lightbox_open('Ass3_popup')"    />
+                        <area  title="Gouda" href="#" shape="rect" coords="7,4,32,28" onclick="lightbox_open('Ass3_popup')"    />
+                        <area  title="Desiderius Erasmus" shape="rect" coords="74,127,97,150" />
+                        <area  title="Relation" href="#" shape="poly" coords="20,34,33,28,83,118,72,127" onclick="lightbox_open('Ass3_popup')"    />
+                        <area  title="Relation" href="#" shape="poly" coords="161,49,172,61,98,132,91,120" onclick="lightbox_open('Ass3_popup')"    />
+                    </map>
+                    <script>
+                        $( ".visualisationsbox img" ).draggable();
+                    </script>
+                </div>
+                <div class="visualisationsbox" id="mapbox" style="display: none;">
+                    <div id="filterbox">
+                        <img src="images/filter-icon.png" alt="Filter icon" height="20" width="20">
+                        <label><input type="checkbox" checked/><span style="color: red"><b>People</b></span></label>
+                        <label><input type="checkbox" checked/><span style="color: green"><b>Places</b></span></label>
+                        <label><input type="checkbox" checked/><span style="color: orange"><b>Events</b></span></label>
+                    </div>
+
+                    <img id="Ass2_map1" src="images/Ass2_map1.jpg" height="504" width="558" style="display: none;" usemap="#Ass2_map_map">
+                    <img id="Ass2_map2" src="images/Ass2_map2.jpg" height="504" width="558" style="display: none;" usemap="#Ass2_map_map">
+
+                    <map name="Ass2_map_map">
+                        <area shape="rect" coords="289,280,312,305" title="Giessen" onclick="lightbox_open('Ass2_popup')" href="#">
+                        <area shape="rect" coords="339,228,362,253" title="Gšttingen" onclick="lightbox_open('Ass2_popup')" href="#">
+                    </map>
+
+                    <img id="Ass3_map" src="images/Ass3_map.jpg" height="631" width="537" style="display: none;" usemap="#Ass3_map_map">
+
+                    <map name="Ass3_map_map">
+                        <area title="Rotterdam" href="#" shape="rect" coords="150,353,180,381" onclick="lightbox_open('Ass3_popup')"/>
+                        <area title="Gouda" href="#" shape="rect" coords="181,333,211,361" onclick="lightbox_open('Ass3_popup')"/>
+                    </map>
+
+                    <script>
+                        $( ".visualisationsbox img" ).draggable();
+                    </script>
+
+                </div>
+                <div class="visualisationsbox" id="rawdatabox" style="display: none;">
+                    <div id="filterbox">
+                        <img src="images/filter-icon.png" alt="Filter icon" height="20" width="20">
+                        <label><input type="checkbox" checked/><span style="color: red"><b>People</b></span></label>
+                        <label><input type="checkbox" checked/><span style="color: green"><b>Places</b></span></label>
+                        <label><input type="checkbox" checked/><span style="color: orange"><b>Events</b></span></label>
+                    </div>
+                    <div id="Ass1_rawdata" class="rawdata" style="display: none;">
+                        <p>
+                            <b>Statistics:</b><br />
+                            <ul>
+                                <li>Number of related people: 2</li>
+                                <li>Number of related places: 0</li>
+                                <li>Number of related events: 2</li>
+                                <li>Number of relations: 5</li>
+                                <li>Number of sources used: 2</li>
+                            </ul>
+
+                            <b>Dirk Fock</b>
+                            <ul>
+                                <li>Born at: 19-6-1858</li>
+                                <li>Born in: Wijk bij Duurstede</li>
+                                <li>Profession: Lawyer</li>
+                                <li>Profession: Minister</li>
+                                <li>Profession: Governor</li>
+                            </ul>
+
+                            <b>Theodoor Herman de Meester</b>
+                            <ul>
+                                <li>Born at: 16-12-1851</li>
+                                <li>Born in: Harderwijk</li>
+                                <li>Profession: Clerk to council of Groningen</li>
+                                <li>Profession: Minister</li>
+                                <li>Profession: Prime-Minister</li>
+                            </ul>
+                        </p>
+                        <button type="submit" class="savebutton">Save</button>
+                    </div>
+
+                    <div id="Ass2_rawdata" class="rawdata" style="display: none;">
+                        <p>
+                            <b>Statistics:</b><br />
+                            <ul>
+                                <li>Number of related people: 0</li>
+                                <li>Number of related places: 3</li>
+                                <li>Number of related events: 0</li>
+                                <li>Number of relations: 5</li>
+                                <li>Number of sources used: 1</li>
+                            </ul>
+
+                            <b>Johan Rudolph Thorbecke</b>
+                            <ul>
+                                <li>Born at: 14-01-1798</li>
+                                <li>Born in: Zwolle</li>
+                                <li>Profession: Private teacher</li>
+                                <li>Profession: Minister</li>
+                                <li>Profession: Prime-Minister</li>
+                                <li>Profession: Minister of State</li>
+                            </ul>
+
+                            <b>Duitsland</b>
+                        </p>
+                        <button type="submit" class="savebutton">Save</button>
+                    </div>
+
+                    <div id="Ass3_rawdata" class="rawdata" style="display: none;">
+                        <p>
+                            <b>Statistics:</b><br />
+                            <ul>
+                                <li>Number of related people: 0</li>
+                                <li>Number of related places: 2</li>
+                                <li>Number of related events: 0</li>
+                                <li>Number of relations: 2</li>
+                                <li>Number of sources used: 6</li>
+                            </ul>
+
+                            <b>Desiderius Erasmus</b>
+                            <ul>
+                                <li>Born at: 28-10-1466</li>
+                                <li>Born at: 28-10-1467</li>
+                                <li>Born at: 28-10-1469</li>
+                                <li>Born in: Rotterdam</li>
+                                <li>Born in: Gouda</li>
+                                <li>Profession: Priest</li>
+                                <li>Profession: Theologian</li>
+                                <li>Profession: Philosopher</li>
+                                <li>Profession: Writer</li>
+                            </ul>
+                        </p>
+                        <button type="submit" class="savebutton">Save</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="timeselector">
+        <input type="text" id="fromtime" autocomplete="off" placeholder="From">
+            -
+        <input type="text" id="totime" autocomplete="off" placeholder="To">
+        <button type="submit" onclick="handleAddedElement('timeselector');">OK</button>
+    </div>
+
+    <div id="infopopup"  class="popup">
+        <img src="images/infoscreen.png" width="1000" height="514" usemap="#infoscreen_map">
+        <map name="infoscreen_map">
+            <area  alt="Search box" title="In the search box you can enter the names of People, Places, and Events in order to add them to the elements overview section on the left. When you start typing in the search box, suggestions will be shown. By clicking these suggestions, which are elements, these elements will be added to the element overview section" shape="rect" coords="410,16,563,45"/>
+            <area  alt="Elements overview" title="In this section you can find your selected elements e.g. People, Places, and Events, and select or deselect certain properties of these elements. Also, elements can be deleted to exclude them from your seach query" shape="rect" coords="31,87,116,107"/>
+            <area  alt="Navigation path" title="The navigation path shows the actions you have taken in chronological order" shape="rect" coords="117,84,245,107"/>
+            <area  alt="Timeline visualisation" title="In the timeline visualisation, the relations between the selected elements are shown and ordered in chronological order, with the lapse of time on the horizontal axis. Relations or parts of elements that are uncertain will be shown with dotted lines instead of solid lines" shape="rect" coords="315,84,403,106"/>
+            <area  alt="Graph visualisation" title="In the graph visualisation, the relations between the selected elements are shown and not ordered in a specific way. Again, relations or parts of elements that are uncertain will be shown with dotted lines instead of solid lines" shape="rect" coords="404,85,474,106"/>
+            <area  alt="Map visualisation" title="In the map visualisation, the relations between the selected elements as well as the elements are shown in a geographical map. Again, relations or parts of elements that are uncertain will be shown with dotted lines instead of solid lines. Also, if the location of the element is uncertain the element will be slightly faded" shape="rect" coords="478,84,540,106"/>
+            <area  alt="Raw data" title="The raw data overview shows all the data available about the elements as well as some statistic information in plain text format" shape="rect" coords="541,85,624,106"/>
+            <area  alt="Elements filter" title="Using the elements filter, the user can select which types of elements will be shown in the visualisations" shape="rect" coords="725,102,976,139"/>
+            <area  alt="Time selector" title="The time selector can be used to select a specific period in time to show results in. By entering a date or year and clicking OK, only elements and relations in the time period between the two entered dates will be shown in the visualisation" shape="rect" coords="448,464,725,488"/>
+        </map>
+    </div>
+
+	<div id="Ass1_popup0" class="popup">
+        <div class="popupnavigationpath">
+            <div class="popupheader"><p>Navigation Path</p></div>
+            <div id="Ass1_navigation" class="treeView">
+                <ul class="collapsibleList">
+                            <li>
+                                Added: Dirk Fock
+                            </li>
+                </ul>
+            </div>
+        </div>
+        <div class="popupinformation">
+            <div class="popupheader"><p>Information</p></div>
+            <div id="Ass1_relation" class="popup_relation">
+                <p>Member of Kabinet de Meester</p>
+                <img id="Ass1_sources" src="images/Ass1_sources.jpg" height="44" width="108" style="margin-left: 0.5em;">
+            </div>
+        </div>
+        <div class="popupsources">
+            <div class="popupheader"><p>Sources</p></div>
+            <div id="Ass1_info" class="popup_info" style="top: 2em;">
+                <img id="Ass1_information" src="images/Ass1_information0.jpg" heigth=auto width="99%" style="margin-left: 2px; margin-top: 2px;">
+            </div>
+        </div>
+        <div class="popupsourcetext">
+            <div class="popupheader"><p>Sourcetext</p></div>
+            <div id="Ass1_sourcetexts" class="popup_sourcetexts">
+                <div class="sourcetext1">
+                    <p>
+                        Van de decentralisatiewet van 1903 was hij een warm voorstander. Uit die zelfde tijd dateren zijn Beschouwingen en voorstellen ter verbetering van den economischen toestand der Inlandsche bevolking van Java en Madoera (Den Haag, 1904), waarmee hij de toenmalige minister van Koloni‘n Idenburg op diens verzoek van advies diende, omdat deze bewindsman uitvoering wilde geven aan zijn plannen in de 'mindere welvaart' van de inheemse bevolking verbetering te brengen. In zijn advies bepleitte hij enige maatregelen van sociaal-economische aard en beklemtoonde hij de noodzaak van een 'goed geregeld, practisch onderwijs'.
+
+Zijn opvattingen bleven niet onopgemerkt en op 17 augustus 1905 werd hij <span class="sourcetexthighlight">minister van Koloni‘n in het kabinet-De Meester</span>. In deze kwaliteit heeft hij de ontwikkeling van het onderwijs krachtig gestimuleerd. In de memorie van toelichting bij de begroting voor 1907 stelde hij verschillende maatregelen op dit gebied voor en vroeg voor de uitbreiding en verbetering van het onderwijs in Indi‘ .1 000.000 aan, waarmede door de Staten-Generaal werd ingestemd.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="Ass1_popup" class="popup">
+        <div class="popupnavigationpath">
+            <div class="popupheader"><p>Navigation Path</p></div>
+            <div id="Ass1_navigation" class="treeView">
+                <ul class="collapsibleList">
+                            <li>
+                                Added: Dirk Fock
+                            </li>
+                            <li>
+                                Added: Theodoor Herman de Meester
+                            </li>
+                </ul>
+            </div>
+        </div>
+        <div class="popupinformation">
+            <div class="popupheader"><p>Information</p></div>
+            <div id="Ass1_relation" class="popup_relation">
+                <p>Member of Kabinet de Meester</p>
+                <img id="Ass1_sources" src="images/Ass1_sources.jpg" height="44" width="108" style="margin-left: 0.5em;">
+            </div>
+        </div>
+        <div class="popupsources">
+            <div class="popupheader"><p>Sources</p></div>
+            <div id="Ass1_info" class="popup_info" style="top: 2em;">
+                <img id="Ass1_information" src="images/Ass1_information.jpg" heigth=auto width="99%" style="margin-left: 2px; margin-top: 2px;">
+            </div>
+        </div>
+        <div class="popupsourcetext">
+            <div class="popupheader"><p>Sourcetext</p></div>
+            <div id="Ass1_sourcetexts" class="popup_sourcetexts">
+                <div class="sourcetext1">
+                    <p>
+                        Van de decentralisatiewet van 1903 was hij een warm voorstander. Uit die zelfde tijd dateren zijn Beschouwingen en voorstellen ter verbetering van den economischen toestand der Inlandsche bevolking van Java en Madoera (Den Haag, 1904), waarmee hij de toenmalige minister van Koloni‘n Idenburg op diens verzoek van advies diende, omdat deze bewindsman uitvoering wilde geven aan zijn plannen in de 'mindere welvaart' van de inheemse bevolking verbetering te brengen. In zijn advies bepleitte hij enige maatregelen van sociaal-economische aard en beklemtoonde hij de noodzaak van een 'goed geregeld, practisch onderwijs'.
+
+Zijn opvattingen bleven niet onopgemerkt en op 17 augustus 1905 werd hij <span class="sourcetexthighlight">minister van Koloni‘n in het kabinet-De Meester</span>. In deze kwaliteit heeft hij de ontwikkeling van het onderwijs krachtig gestimuleerd. In de memorie van toelichting bij de begroting voor 1907 stelde hij verschillende maatregelen op dit gebied voor en vroeg voor de uitbreiding en verbetering van het onderwijs in Indi‘ .1 000.000 aan, waarmede door de Staten-Generaal werd ingestemd.
+                    </p>
+                </div>
+                <div class="sourcetext2">
+                    <p>
+                        In 1905 werd hij tot vice-president herbenoemd en stond hij op het punt naar Indi‘ terug te keren, toen hem een uitnodiging van H. Goeman Borgesius, de leider van de Unieliberalen, bereikte om deel te nemen aan de formatiebesprekingen voor een nieuw kabinet dat de plaats zou moeten innemen van het bij de Tweede Kamerverkiezingen met klein verschil verslagen ministerie-Kuyper.
+
+Hoewel De Meester al vroeg met de liberale beginselen had gesympathiseerd, had hij zich nooit met de actieve politiek ingelaten. Dit heeft hem er echter niet van weerhouden om, toen hij, wederom op Piersons initiatief, daarvoor door Goeman Borgesius was gevraagd en nadat verschillende andere kandidaten hadden geweigerd, de portefeuille van Financi‘n en het (tijdelijk) <span class="sourcetexthighlight">voorzitterschap van de ministerraad op zich te nemen in het naar hem en minister van Justitie E.E. van Raalte genoemde vrijzinnige kabinet</span>, dat op 17-8-1905 optrad. Die daad getuigde van politieke moed, aangezien het nieuwe ministerie niet op de meerderheid in de Tweede Kamer kon rekenen. Slechts 35 kamerleden waren gekozen op het gemeenschappelijk programma van de Liberale Unie en de vrijzinnig-democraten. De steun van de buiten deze coalitie gebleven rechtse Vrij-Liberalen en van de sociaal-democraten was echter onmisbaar om de 48 confessionele kamerleden die de oppositie vormden, het hoofd te kunnen bieden. Het was onder deze omstandigheden begrijpelijk dat Goeman Borgesius er de voorkeur aan gaf zelf buiten de regering te blijven, te meer waar zijn kamerzetel (voor het district Enkhuizen) slechts met een meerderheid van 103 stemmen op de antirevolutionairen was veroverd.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="Ass2_popup" class="popup">
+        <div class="popupnavigationpath">
+            <div class="popupheader"><p>Navigation Path</p></div>
+            <div id="Ass2_navigation" class="treeView">
+                <ul class="collapsibleList">
+                            <li>
+                                Added: Johan Rudolph Thorbecke
+                            </li>
+                            <li>
+                                Added: Duitsland
+                            </li>
+                </ul>
+            </div>
+        </div>
+        <div class="popupinformation">
+            <div class="popupheader"><p>Information</p></div>
+            <div id="Ass2_relation1" class="popup_relation" href="#" onclick="document.getElementById('Ass2_info1').style.display='block'; document.getElementById('Ass2_info2').style.display='none'; document.getElementById('Ass2_info3').style.display='none'; document.getElementById('Ass2_sourcetexts1').style.display='block'; document.getElementById('Ass2_sourcetexts2').style.display='none'; document.getElementById('Ass2_sourcetexts3').style.display='none';">
+                <p>Living in Giessen</p>
+                <img id="Ass2_sources1" src="images/Ass2_sources.jpg" height="44" width="108" style="margin-left: 0.5em;">
+            </div>
+
+            <div id="Ass2_relation2" class="popup_relation" href="#" onclick="document.getElementById('Ass2_info1').style.display='none'; document.getElementById('Ass2_info2').style.display='block'; document.getElementById('Ass2_info3').style.display='none'; document.getElementById('Ass2_sourcetexts1').style.display='none'; document.getElementById('Ass2_sourcetexts2').style.display='block'; document.getElementById('Ass2_sourcetexts3').style.display='none';">
+                <p>Living in Gšttingen</p>
+                <img id="Ass2_sources2" src="images/Ass2_sources.jpg" height="44" width="108" style="margin-left: 0.5em;">
+            </div>
+
+            <div id="Ass2_relation3" class="popup_relation" href="#" onclick="document.getElementById('Ass2_info1').style.display='none'; document.getElementById('Ass2_info2').style.display='none'; document.getElementById('Ass2_info3').style.display='block'; document.getElementById('Ass2_sourcetexts1').style.display='none'; document.getElementById('Ass2_sourcetexts2').style.display='none'; document.getElementById('Ass2_sourcetexts3').style.display='block';">
+                <p>Private teacher</p>
+                <img id="Ass2_sources3" src="images/Ass2_sources.jpg" height="44" width="108" style="margin-left: 0.5em;">
+            </div>
+        </div>
+        <div class="popupsources">
+            <div class="popupheader"><p>Sources</p></div>
+            <div id="Ass2_info1" class="popup_info" style="top: 2em;" onclick="document.getElementById('Ass2_sourcetexts1').style.display='block'; document.getElementById('Ass2_sourcetexts2').style.display='none'; document.getElementById('Ass2_sourcetexts3').style.display='none';">
+                <img id="Ass2_information1" src="images/Ass2_information1.jpg" heigth=auto width="99%" style="margin-left: 2px; margin-top: 2px;">
+            </div>
+
+            <div id="Ass2_info2" class="popup_info" style="display: none; top: 120px;" onclick="document.getElementById('Ass2_sourcetexts1').style.display='none'; document.getElementById('Ass2_sourcetexts2').style.display='block'; document.getElementById('Ass2_sourcetexts3').style.display='none';">
+                <img id="Ass2_information2" src="images/Ass2_information2.jpg" heigth=auto width="99%" style="margin-left: 2px; margin-top: 2px;">
+            </div>
+
+            <div id="Ass2_info3" class="popup_info" style="display: none; top: -moz-calc(240px - 2em);" onclick="document.getElementById('Ass2_sourcetexts1').style.display='none'; document.getElementById('Ass2_sourcetexts2').style.display='none'; document.getElementById('Ass2_sourcetexts3').style.display='block';">
+                <img id="Ass2_information3" src="images/Ass2_information3.jpg" heigth=auto width="99%" style="margin-left: 2px; margin-top: 2px;">
+            </div>
+        </div>
+        <div class="popupsourcetext">
+            <div class="popupheader"><p>Sourcetext</p></div>
+            <div id="Ass2_sourcetexts1" class="popup_sourcetexts">
+                <div class="sourcetext0">
+                    <p>
+                       Nadat hij in 1820, na verdediging eener dissertatie de Casinio Pollione, den graad van Mr. in de beide regten had verkregen, bezocht hij gedurende een paar jaren Duitschland, waar hij zich met de studie der wijsbegeerte vertrouwd maakte. Na voor een korten tijd in het vaderland te zijn teruggekeerd, bezocht hij op nieuw Duitschland en opende <span class="sourcetexthighlight">te Giessen</span>, als vrij hoogleeraar, een akademischen cursus; hij begaf zich daarna naar Gšttingen, waar hij van zijne wijsgeerig-geschiedkundige kennis blijken gaf o.a. door zijnen brief aan den Hoogleer Eichhorn: Ueber der organischen Charakter der Geschichte en als beoordeelaar in het beroemde tijdschrift: Gšttinger gelehrter Anzeigen. In 1824 keerde hij naar Nederland terug en deed zich ook hier als schrijver kennen door zijne Bedenkingen aangaande het Regt en den Staat.
+                    </p>
+                </div>
+            </div>
+
+            <div id="Ass2_sourcetexts2" class="popup_sourcetexts" style="display: none;">
+                <div class="sourcetext0">
+                    <p>
+                       Nadat hij in 1820, na verdediging eener dissertatie de Casinio Pollione, den graad van Mr. in de beide regten had verkregen, bezocht hij gedurende een paar jaren Duitschland, waar hij zich met de studie der wijsbegeerte vertrouwd maakte. Na voor een korten tijd in het vaderland te zijn teruggekeerd, bezocht hij op nieuw Duitschland en opende te Giessen, als vrij hoogleeraar, een akademischen cursus; hij begaf zich daarna naar <span class="sourcetexthighlight">Gšttingen</span>, waar hij van zijne wijsgeerig-geschiedkundige kennis blijken gaf o.a. door zijnen brief aan den Hoogleer Eichhorn: Ueber der organischen Charakter der Geschichte en als beoordeelaar in het beroemde tijdschrift: Gšttinger gelehrter Anzeigen. In 1824 keerde hij naar Nederland terug en deed zich ook hier als schrijver kennen door zijne Bedenkingen aangaande het Regt en den Staat.
+                    </p>
+                </div>
+            </div>
+
+            <div id="Ass2_sourcetexts3" class="popup_sourcetexts" style="display: none;">
+                <div class="sourcetext0">
+                    <p>
+                       Nadat hij in 1820, na verdediging eener dissertatie de Casinio Pollione, den graad van Mr. in de beide regten had verkregen, bezocht hij gedurende een paar jaren Duitschland, waar hij zich met de studie der wijsbegeerte vertrouwd maakte. Na voor een korten tijd in het vaderland te zijn teruggekeerd, bezocht hij op nieuw Duitschland en opende te Giessen, <span class="sourcetexthighlight">als vrij hoogleeraar</span>, een akademischen cursus; hij begaf zich daarna naar Gšttingen, waar hij van zijne wijsgeerig-geschiedkundige kennis blijken gaf o.a. door zijnen brief aan den Hoogleer Eichhorn: Ueber der organischen Charakter der Geschichte en als beoordeelaar in het beroemde tijdschrift: Gšttinger gelehrter Anzeigen. In 1824 keerde hij naar Nederland terug en deed zich ook hier als schrijver kennen door zijne Bedenkingen aangaande het Regt en den Staat.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="Ass3_popup" class="popup">
+        <div class="popupnavigationpath">
+            <div class="popupheader"><p>Navigation Path</p></div>
+            <div id="Ass3_navigation" class="treeView">
+                <ul class="collapsibleList">
+                            <li>
+                                Added: Desiderius Erasmus
+                            </li>
+                </ul>
+            </div>
+        </div>
+        <div class="popupinformation">
+            <div class="popupheader"><p>Information</p></div>
+            <div id="Ass3_relation1" class="popup_relation" href="#" onclick="
+            document.getElementById('Ass3_info1').style.display='block';
+            document.getElementById('Ass3_info2').style.display='none';
+            document.getElementById('Ass3_info3').style.display='none';
+            document.getElementById('Ass3_info4').style.display='none';
+            document.getElementById('Ass3_info5').style.display='none';">
+                <p>Born at 28-10-1466</p>
+                <img id="Ass3_sources1" src="images/Ass3_sources1.jpg" height="44" width="108" style="margin-left: 0.5em;">
+            </div>
+
+            <div id="Ass3_relation2" class="popup_relation" href="#" onclick="
+            document.getElementById('Ass3_info1').style.display='none';
+            document.getElementById('Ass3_info2').style.display='block';
+            document.getElementById('Ass3_info3').style.display='none';
+            document.getElementById('Ass3_info4').style.display='none';
+            document.getElementById('Ass3_info5').style.display='none';">
+                <p>Born at 28-10-1467</p>
+                <img id="Ass3_sources2" src="images/Ass3_sources2.jpg" height="44" width="108" style="margin-left: 0.5em;">
+            </div>
+
+            <div id="Ass3_relation3" class="popup_relation" href="#" onclick="
+            document.getElementById('Ass3_info1').style.display='none';
+            document.getElementById('Ass3_info2').style.display='none';
+            document.getElementById('Ass3_info3').style.display='block';
+            document.getElementById('Ass3_info4').style.display='none';
+            document.getElementById('Ass3_info5').style.display='none';">
+                <p>Born at 28-10-1469</p>
+                <img id="Ass3_sources3" src="images/Ass3_sources3.jpg" height="44" width="108" style="margin-left: 0.5em;">
+            </div>
+
+            <div id="Ass3_relation4" class="popup_relation" href="#" onclick="
+            document.getElementById('Ass3_info1').style.display='none';
+            document.getElementById('Ass3_info2').style.display='none';
+            document.getElementById('Ass3_info3').style.display='none';
+            document.getElementById('Ass3_info4').style.display='block';
+            document.getElementById('Ass3_info5').style.display='none';">
+                <p>Born in Rotterdam</p>
+                <img id="Ass3_sources3" src="images/Ass3_sources4.jpg" height="44" width="108" style="margin-left: 0.5em;">
+            </div>
+
+            <div id="Ass3_relation5" class="popup_relation" href="#" onclick="
+            document.getElementById('Ass3_info1').style.display='none';
+            document.getElementById('Ass3_info2').style.display='none';
+            document.getElementById('Ass3_info3').style.display='none';
+            document.getElementById('Ass3_info4').style.display='none';
+            document.getElementById('Ass3_info5').style.display='block';">
+                <p>Born in Gouda</p>
+                <img id="Ass3_sources5" src="images/Ass3_sources5.jpg" height="44" width="108" style="margin-left: 0.5em;">
+            </div>
+        </div>
+        <div class="popupsources">
+            <div class="popupheader"><p>Sources</p></div>
+            <div id="Ass3_info1" class="popup_info" style="top: 2em;">
+                <img id="Ass3_information1" src="images/Ass3_information1.jpg" heigth=auto width="99%" style="margin-left: 2px; margin-top: 2px;" usemap="#Ass3_info1_map">
+            	<map name="Ass3_info1_map">
+					<area  alt="" title="DBNL" shape="rect" coords="34,0,299,78" onclick="document.getElementById('Ass3_sourcetexts1').style.display='block'; document.getElementById('Ass3_sourcetexts2').style.display='none';"/>
+					<area  alt="" title="Wikipedia" shape="rect" coords="39,91,304,169" onclick="document.getElementById('Ass3_sourcetexts1').style.display='none'; document.getElementById('Ass3_sourcetexts2').style.display='block';"/>
+					<area  alt="" title="Nieuw Nederlands Biografisch Woordenboek" shape="rect" coords="40,178,305,256" onclick="document.getElementById('Ass3_sourcetexts3').style.display='block'; document.getElementById('Ass3_sourcetexts4').style.display='none'; document.getElementById('Ass3_sourcetexts5').style.display='none';"/>
+					<area  alt="" title="BW van Nederlandsche Godsgeleerden" shape="rect" coords="37,270,302,348" onclick="document.getElementById('Ass3_sourcetexts3').style.display='none'; document.getElementById('Ass3_sourcetexts4').style.display='block'; document.getElementById('Ass3_sourcetexts5').style.display='none';"/>
+					<area  alt="" title="Letterkundig Woordenboek voor Noord en Zuid" shape="rect" coords="36,358,301,436" onclick="document.getElementById('Ass3_sourcetexts3').style.display='none'; document.getElementById('Ass3_sourcetexts4').style.display='none'; document.getElementById('Ass3_sourcetexts5').style.display='block';"/>
+				</map>
+            </div>
+
+            <div id="Ass3_info2" class="popup_info" style="display: none; top: 2em;">
+                <img id="Ass3_information2" src="images/Ass3_information2.jpg" heigth=auto width="99%" style="margin-left: 2px; margin-top: 2px;" usemap="#Ass3_info2_map">
+            	<map name="Ass3_info2_map">
+					<area  alt="" title="BW van Nederlandsche Godsgeleerden" shape="rect" coords="34,0,299,78" onclick="document.getElementById('Ass3_sourcetexts3').style.display='none'; document.getElementById('Ass3_sourcetexts4').style.display='block'; document.getElementById('Ass3_sourcetexts5').style.display='none';"/>
+					<area  alt="" title="Letterkundig Woordenboek voor Noord en Zuid" shape="rect" coords="39,91,304,169" onclick="document.getElementById('Ass3_sourcetexts3').style.display='none'; document.getElementById('Ass3_sourcetexts4').style.display='none'; document.getElementById('Ass3_sourcetexts5').style.display='block';"/>
+					<area  alt="" title="Wikipedia" shape="rect" coords="40,178,305,256" onclick="document.getElementById('Ass3_sourcetexts1').style.display='none'; document.getElementById('Ass3_sourcetexts2').style.display='block';"/>
+					<area  alt="" title="Nieuw Nederlands Biografisch Woordenboek" shape="rect" coords="37,270,302,348" onclick="document.getElementById('Ass3_sourcetexts3').style.display='block'; document.getElementById('Ass3_sourcetexts4').style.display='none'; document.getElementById('Ass3_sourcetexts5').style.display='none';"/>
+					<area  alt="" title="DBNL" shape="rect" coords="36,358,301,436" onclick="document.getElementById('Ass3_sourcetexts1').style.display='block'; document.getElementById('Ass3_sourcetexts2').style.display='none';"/>
+				</map>
+            </div>
+
+            <div id="Ass3_info3" class="popup_info" style="display: none; top: 2em;">
+                <img id="Ass3_information3" src="images/Ass3_information3.jpg" heigth=auto width="99%" style="margin-left: 2px; margin-top: 2px;" usemap="#Ass3_info3_map">
+            	<map name="Ass3_info3_map">
+					<area  alt="" title="Wikipedia" shape="rect" coords="34,0,299,78" onclick="document.getElementById('Ass3_sourcetexts1').style.display='none'; document.getElementById('Ass3_sourcetexts2').style.display='block';"/>
+					<area  alt="" title="BW van Nederlandsche Godsgeleerden" shape="rect" coords="39,91,304,169" onclick="document.getElementById('Ass3_sourcetexts3').style.display='none'; document.getElementById('Ass3_sourcetexts4').style.display='block'; document.getElementById('Ass3_sourcetexts5').style.display='none';"/>
+					<area  alt="" title="Letterkundig Woordenboek voor Noord en Zuid" shape="rect" coords="40,178,305,256" onclick="document.getElementById('Ass3_sourcetexts3').style.display='none'; document.getElementById('Ass3_sourcetexts4').style.display='none'; document.getElementById('Ass3_sourcetexts5').style.display='block';"/>
+					<area  alt="" title="Nieuw Nederlands Biografisch Woordenboek" shape="rect" coords="37,270,302,348" onclick="document.getElementById('Ass3_sourcetexts3').style.display='block'; document.getElementById('Ass3_sourcetexts4').style.display='none'; document.getElementById('Ass3_sourcetexts5').style.display='none';"/>
+					<area  alt="" title="DBNL" shape="rect" coords="36,358,301,436" onclick="document.getElementById('Ass3_sourcetexts1').style.display='block'; document.getElementById('Ass3_sourcetexts2').style.display='none';"/>
+				</map>
+            </div>
+
+            <div id="Ass3_info4" class="popup_info" style="display: none; top: 2em;">
+                <img id="Ass3_information4" src="images/Ass3_information4.jpg" heigth=auto width="99%" style="margin-left: 2px; margin-top: 2px;" usemap="#Ass3_info4_map">
+            	<map name="Ass3_info4_map">
+					<area  alt="" title="DBNL" shape="rect" coords="34,0,299,78" onclick="document.getElementById('Ass3_sourcetexts1').style.display='block'; document.getElementById('Ass3_sourcetexts2').style.display='none';"/>
+					<area  alt="" title="BW van Nederlandsche Godsgeleerden" shape="rect" coords="39,91,304,169" onclick="document.getElementById('Ass3_sourcetexts3').style.display='none'; document.getElementById('Ass3_sourcetexts4').style.display='block'; document.getElementById('Ass3_sourcetexts5').style.display='none';"/>
+					<area  alt="" title="Letterkundig Woordenboek voor Noord en Zuid" shape="rect" coords="40,178,305,256" onclick="document.getElementById('Ass3_sourcetexts3').style.display='none'; document.getElementById('Ass3_sourcetexts4').style.display='none'; document.getElementById('Ass3_sourcetexts5').style.display='block';"/>
+					<area  alt="" title="Wikipedia" shape="rect" coords="37,270,302,348" onclick="document.getElementById('Ass3_sourcetexts1').style.display='none'; document.getElementById('Ass3_sourcetexts2').style.display='block';"/>
+				</map>
+            </div>
+
+            <div id="Ass3_info5" class="popup_info" style="display: none; top: 2em;">
+                <img id="Ass3_information5" src="images/Ass3_information5.jpg" heigth=auto width="99%" style="margin-left: 2px; margin-top: 2px;" usemap="#Ass3_info5_map">
+            	<map name="Ass3_info5_map">
+					<area  alt="" title="Wikipedia" shape="rect" coords="34,0,299,78" onclick="document.getElementById('Ass3_sourcetexts1').style.display='none'; document.getElementById('Ass3_sourcetexts2').style.display='block';"/>
+					<area  alt="" title="DBNL" shape="rect" coords="39,91,304,169" onclick="document.getElementById('Ass3_sourcetexts1').style.display='block'; document.getElementById('Ass3_sourcetexts2').style.display='none';"/>
+					<area  alt="" title="BW van Nederlandsche Godsgeleerden" shape="rect" coords="40,178,305,256" onclick="document.getElementById('Ass3_sourcetexts3').style.display='none'; document.getElementById('Ass3_sourcetexts4').style.display='block'; document.getElementById('Ass3_sourcetexts5').style.display='none';"/>
+					<area  alt="" title="Letterkundig Woordenboek voor Noord en Zuid" shape="rect" coords="37,270,302,348" onclick="document.getElementById('Ass3_sourcetexts3').style.display='none'; document.getElementById('Ass3_sourcetexts4').style.display='none'; document.getElementById('Ass3_sourcetexts5').style.display='block';"/>
+				</map>
+            </div>
+        </div>
+        <div class="popupsourcetext">
+            <div class="popupheader"><p>Sourcetext</p></div>
+            <div id="Ass3_sourcetexts1" class="popup_sourcetexts">
+                <div class="sourcetext1">
+                    <p>
+                        Desiderius Erasmus
+						geboren: <span class="sourcetexthighlight">28 oktober 1466</span> te <span class="sourcetexthighlight">Rotterdam</span>
+						overleden: 12 juli 1536 te Bazel
+                    </p>
+                </div>
+            </div>
+            <div id="Ass3_sourcetexts2" class="popup_sourcetexts" style="display: none;">
+                <div class="sourcetext1">
+                    <p>
+                    	Desiderius Erasmus (<span class="sourcetexthighlight">Rotterdam, 28 oktober 1466, 1467 of 1469</span> Ð Bazel, 12 juli 1536) was een Nederlandse priester, augustijner kanunnik, theoloog, filosoof, schrijver en humanist.
+                    </p>
+                </div>
+            </div>
+            <div id="Ass3_sourcetexts3" class="popup_sourcetexts">
+                <div class="sourcetext2">
+                    <p>
+                        ERASMUS werd geboren in den nacht van <span class="sourcetexthighlight">27 op 28 Oct., waarschijnlijk in 1466</span>, uit een ongeregelde verbintenis, waarvan de aard in 't duister ligt. In 1506 worden zijn ouders in een aan hem gerichte pauselijke bul beschreven als een ongehuwde leek (solutus) en een weduwe; een dergelijk document van 1517 doet de mogelijkheid veronderstellen, dat zijn vader priester geweest is.
+                    </p>
+                </div>
+            </div>
+            <div id="Ass3_sourcetexts4" class="popup_sourcetexts" style="display: none;">
+                <div class="sourcetext2">
+                    <p>
+                    	Desidel'ius Erasmlls, den <span class="sourcetexthighlight">28 October 1467</span> 2) te <span class="sourcetexthighlight">Rot-
+						terdam</span>3} geboren, was de zoon van Gerrit Elias van Gouda
+						en van Elisabeth, de dochter van eenen geneesheer te Ze-
+						venbergen. Eene wettige huweljjkaverbindtenis mogten zijne
+						ouders niet aangaan, zoodat de vader, die om de verdrie-
+						telijkheden,welke zijne betrekkingen hem aandeden, naar
+						Rome gevlugt was, voor de eerste opvoeding van zijnen
+						zoon geene.~org. kon dr~gen. Op vijfjarigen leeftijd werd onze
+						Erasmus by Pieter Wmkel te Gouda ter schole besteld.
+                    </p>
+                </div>
+            </div>
+            <div id="Ass3_sourcetexts5" class="popup_sourcetexts" style="display: none;">
+                <div class="sourcetext2">
+                    <p>
+                        Erasmus, Desiderius -, <span class="sourcetexthighlight">1467</span>-1536, uit <span class="sourcetexthighlight">Rotterdam</span>, de grote Humanist. Hij was te Deventer op de school van de Broeders des Gemenen Levens onder leiding van Hegius; daarna werd hij tegen zijn zin opgenomen in het klooster Steyn bij Gouda, 1486-'93. In 1492 werd hij priester.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="fade" onClick="lightbox_close();"></div>
+</body>
+</html>

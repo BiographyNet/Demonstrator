@@ -1,0 +1,17 @@
+# Do not include any file in the data directory due to rights issues
+/data/**
+
+# Do include the readme file that explains about the rights issues
+!/data/README.md
+
+# Do not include crappy macOS directory management files 
+**/.DS_Store
+
+# Do not include crappy macOS directory management files
+**/._.DS_Store
+
+# Do not include macOS automatic backup files
+**/._*
+
+# Do not include any linux/gedit automatic backup files
+**/~*
